@@ -20,8 +20,6 @@ public class MyThread implements Runnable{
 	public double getLastResult(){
 		return lastResult;
 	}
-	
-	
 	/**
 	* Вычисляем интеграл подотрезка
 	**/
