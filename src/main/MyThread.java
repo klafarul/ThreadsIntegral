@@ -35,8 +35,8 @@ public class MyThread implements Runnable{
 			else{
 				lastResult = currentResult;
 				end = true;
-			}
-			res.setResult(number, lastResult);						
+				res.setResult(number, lastResult);
+			}							
 		} while (!end);
 	}
 } 
