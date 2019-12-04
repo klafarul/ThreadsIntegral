@@ -3,10 +3,7 @@ package main;
 import java.util.ArrayList;
 
 public class Calculation {
-	/**
-	* этот массив хранит результат вычисления каждого потока, номер потока соответствует номеру элемента в массиве
-	**/
-	private ArrayList<Double> results;
+	
 	
 	double begin, end;
 	int numberOfThreads;
@@ -18,10 +15,7 @@ public class Calculation {
 	*конструктор
 	**/
 	public Calculation(double begin, double end, double alfa, int numberOfThreads){
-		results = new ArrayList<Double>();
-		for (int i = 0; i < numberOfThreads; i++){
-			results.add(0.0);
-		}
+		
 		this.begin = begin;
 		this.end = end;
 		this.alfa = alfa;
@@ -34,12 +28,6 @@ public class Calculation {
 	**/
 	public double function(double x){
 		return x*x;		
-	}
-	
-	
-	
-	synchronized void setResult(int threadNumber, double result){
-		results.set(threadNumber, result);	
 	}	
 	/**
 	*Вычисляет интеграл на отрезке
@@ -58,11 +46,5 @@ public class Calculation {
 	}
 	
 	
-	public double getIntegral(){
-		double result = 0.0;
-		for (int i = 0; i < results.size(); i++){
-			result += results.get(i);
-		}
-		return result;
-	}	
+
 }
