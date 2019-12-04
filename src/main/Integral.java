@@ -9,7 +9,7 @@ import static java.lang.Double.*;
 public class Integral extends Thread{
 	
 	public static void main(String... args){
-		int numOfThreads = 2;// количество потоков
+		int numOfThreads = 100;// количество потоков
 		double begin = 0;
 		double end = 1;
 		double alfa = 0.00000000005;
@@ -21,7 +21,7 @@ public class Integral extends Thread{
 			arrayOfThreads[i] = new MyThread(i, results);
 		}
 		try {
-			Thread.sleep(1500);
+			Thread.sleep(15000);
 			System.out.println(".....");
 		}
 		catch(InterruptedException e) {

@@ -41,10 +41,19 @@ public class Calculation {
 	
 	
 	
-	synchronized void setResult(double result){
+	void setResult(double result){
+		
 		while(true){
-			if (results.compareAndSet(results.get(), results.get() + result)){
+			Double expect = results.get();
+			
+			
+			if (results.compareAndSet(expect, expect + result)){
+				System.out.println(results.get());
 				break;
+			}
+			else{
+				System.out.println("konflikt" + results.get());
+				
 			}
 		}
 		
