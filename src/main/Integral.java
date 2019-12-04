@@ -1,19 +1,23 @@
 package main;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.util.concurrent.locks.ReentrantLock;
+
+
 public class Integral extends Thread{
 	
 	public static void main(String... args){
 		int numOfThreads = 2;// количество потоков
 		double begin = 0;
 		double end = 1;
-		double alfa = 0.005;
+		double alfa = 0.00000005;
 		
 		Calculation results = new Calculation(begin, end, alfa, numOfThreads);
+		ReentrantLock locker = new ReentrantLock();//LOCKER
+		
 		MyThread[] arrayOfThreads = new MyThread[numOfThreads];
+		
 		for (int i = 0; i < numOfThreads; i++){
-			arrayOfThreads[i] = new MyThread(i, results);
+			arrayOfThreads[i] = new MyThread(i, results, locker);
 		}
 		try {
 			Thread.sleep(1500);

@@ -1,12 +1,14 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Calculation {
 	/**
 	* этот массив хранит результат вычисления каждого потока, номер потока соответствует номеру элемента в массиве
 	**/
 	private ArrayList<Double> results;
+	private double result;
 	
 	double begin, end;
 	int numberOfThreads;
@@ -38,8 +40,8 @@ public class Calculation {
 	
 	
 	
-	synchronized void setResult(int threadNumber, double result){
-		results.set(threadNumber, result);	
+	void setResult(int threadNumber, double result){
+		this.result += result;	
 	}	
 	/**
 	*Вычисляет интеграл на отрезке
@@ -59,10 +61,7 @@ public class Calculation {
 	
 	
 	public double getIntegral(){
-		double result = 0.0;
-		for (int i = 0; i < results.size(); i++){
-			result += results.get(i);
-		}
-		return result;
+		
+		return this.result;
 	}	
 }
