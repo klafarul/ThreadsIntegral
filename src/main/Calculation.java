@@ -1,12 +1,15 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
+import static java.lang.Double.*;
 
 public class Calculation {
 	/**
 	* этот массив хранит результат вычисления каждого потока, номер потока соответствует номеру элемента в массиве
 	**/
-	private ArrayList<Double> results;
+	
+	AtomicReference<Double> results;
 	
 	double begin, end;
 	int numberOfThreads;
@@ -18,10 +21,10 @@ public class Calculation {
 	*конструктор
 	**/
 	public Calculation(double begin, double end, double alfa, int numberOfThreads){
-		results = new ArrayList<Double>();
-		for (int i = 0; i < numberOfThreads; i++){
-			results.add(0.0);
-		}
+		results = new AtomicReference<Double>(0.0);
+
+		
+		
 		this.begin = begin;
 		this.end = end;
 		this.alfa = alfa;
@@ -38,8 +41,13 @@ public class Calculation {
 	
 	
 	
-	synchronized void setResult(int threadNumber, double result){
-		results.set(threadNumber, result);	
+	synchronized void setResult(double result){
+		while(true){
+			if (results.compareAndSet(results.get(), results.get() + result)){
+				break;
+			}
+		}
+		
 	}	
 	/**
 	*Вычисляет интеграл на отрезке
@@ -56,13 +64,8 @@ public class Calculation {
 			
 		return result * step;
 	}
-	
-	
 	public double getIntegral(){
-		double result = 0.0;
-		for (int i = 0; i < results.size(); i++){
-			result += results.get(i);
-		}
-		return result;
+		
+		return results.get();
 	}	
 }

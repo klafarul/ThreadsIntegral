@@ -2,13 +2,18 @@ package main;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.concurrent.atomic.AtomicLong;
+import static java.lang.Double.*;
+
+
 public class Integral extends Thread{
 	
 	public static void main(String... args){
 		int numOfThreads = 2;// количество потоков
 		double begin = 0;
 		double end = 1;
-		double alfa = 0.005;
+		double alfa = 0.00000000005;
+		
 		
 		Calculation results = new Calculation(begin, end, alfa, numOfThreads);
 		MyThread[] arrayOfThreads = new MyThread[numOfThreads];

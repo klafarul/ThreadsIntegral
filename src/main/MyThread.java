@@ -8,6 +8,7 @@ public class MyThread implements Runnable{
 	Thread thrd;
 	int number;
 	Calculation res;
+
 	
 	
 	public MyThread(int number, Calculation res){
@@ -35,8 +36,9 @@ public class MyThread implements Runnable{
 			else{
 				lastResult = currentResult;
 				end = true;
+				res.setResult(lastResult);
 			}
-			res.setResult(number, lastResult);						
+									
 		} while (!end);
 	}
 } 
